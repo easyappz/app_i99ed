@@ -5,6 +5,7 @@ import './App.css';
 
 import { Home } from './components/Home';
 import { LoginPage, RegisterPage } from './components/Auth';
+import { ChatPage } from './components/Chat';
 
 function App() {
   /** Никогда не удаляй этот код */
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/chat" element={<ChatPage />} />
       </Routes>
     </ErrorBoundary>
   );
