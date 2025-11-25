@@ -1,0 +1,82 @@
+get:
+  summary: Get current user profile
+  description: Retrieve the profile information of the authenticated user
+  operationId: getProfile
+  tags:
+    - Profile
+  isSecure: true
+  security:
+    - BearerAuth: []
+  responses:
+    '200':
+      description: User profile retrieved successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: User ID
+              username:
+                type: string
+                description: Username
+    '401':
+      description: Unauthorized - invalid or missing token
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yml#/components/schemas/Error'
+
+put:
+  summary: Update current user profile
+  description: Update the profile information of the authenticated user
+  operationId: updateProfile
+  tags:
+    - Profile
+  isSecure: true
+  security:
+    - BearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            username:
+              type: string
+              minLength: 3
+              maxLength: 150
+              description: New username
+  responses:
+    '200':
+      description: Profile updated successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: User ID
+              username:
+                type: string
+                description: Updated username
+    '400':
+      description: Bad request - validation error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              username:
+                type: array
+                items:
+                  type: string
+    '401':
+      description: Unauthorized - invalid or missing token
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yml#/components/schemas/Error'

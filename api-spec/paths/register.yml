@@ -1,0 +1,59 @@
+post:
+  summary: Register a new user
+  description: Create a new user account with username and password
+  operationId: registerUser
+  tags:
+    - Authentication
+  isSecure: false
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - username
+            - password
+          properties:
+            username:
+              type: string
+              minLength: 3
+              maxLength: 150
+              description: Unique username for the account
+            password:
+              type: string
+              minLength: 6
+              format: password
+              description: User password
+  responses:
+    '201':
+      description: User successfully registered
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: User ID
+              username:
+                type: string
+                description: Username
+              token:
+                type: string
+                description: Authentication token
+    '400':
+      description: Bad request - validation error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              username:
+                type: array
+                items:
+                  type: string
+              password:
+                type: array
+                items:
+                  type: string

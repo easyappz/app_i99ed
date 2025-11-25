@@ -1,0 +1,26 @@
+post:
+  summary: User logout
+  description: Invalidate the current authentication token
+  operationId: logoutUser
+  tags:
+    - Authentication
+  isSecure: true
+  security:
+    - BearerAuth: []
+  responses:
+    '200':
+      description: Successfully logged out
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              detail:
+                type: string
+                example: Successfully logged out
+    '401':
+      description: Unauthorized - invalid or missing token
+      content:
+        application/json:
+          schema:
+            $ref: '../openapi.yml#/components/schemas/Error'
